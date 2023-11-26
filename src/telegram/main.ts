@@ -3,7 +3,8 @@ import dotenv from 'dotenv'; dotenv.config()
 import start from './commands/start';
 import help from './commands/help';
 import message from './events/message';
-import command from './commands/command';
+import get_message from './callback/get_message';
+import get_url from './callback/get_url';
 
 export class Launch {
   bot: any = new Telegraf<Scenes.SceneContext>(process.env.TG_TOKEN || '', { handlerTimeout: 60 * 60 * 1000 });
@@ -19,8 +20,11 @@ export class Launch {
       //this.bot.use(stage.middleware());
 
       this.bot.start(start);
-      this.bot.command('command', command);
       this.bot.command('help', help);
+      this.bot.command('command', get_message);
+      
+      this.bot.action('get_message', get_message);
+      this.bot.action('get_url', get_url);
 
       this.bot.use(message)
       this.bot.launch();
