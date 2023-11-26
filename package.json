@@ -1,0 +1,43 @@
+{
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fluent-ffmpeg": "^2.1.2",
+    "miniget": "^4.2.3",
+    "netscape-cookies-parser": "^1.0.2",
+    "node-fetch": "^2.7.0",
+    "puppeteer": "^21.5.0",
+    "telegraf": "^4.13.1",
+    "telegraf-session-local": "^2.1.1",
+    "tiktok-signature": "^1.8.0",
+    "tslog": "^4.8.2",
+    "video-converter": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.24",
+    "@types/node": "^20.8.10",
+    "@types/node-fetch": "^2.6.8",
+    "@types/selenium-webdriver": "^4.1.19",
+    "nodemon": "^2.0.22",
+    "prisma": "^4.14.1"
+  },
+  "scripts": {
+    "start": "nodemon index.ts"
+  },
+  "compilerOptions": {
+    "typeRoots": [
+      "src/@types",
+      "node_modules/@types"
+    ],
+    "outDir": "dist"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "extends": "@tsconfig/node18/tsconfig.json"
+}
