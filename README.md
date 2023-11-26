@@ -1,4 +1,4 @@
-# tiktok-parser-bot
+# bot-starter-pack
 
 # Pre-requisites
 
