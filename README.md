@@ -1,4 +1,4 @@
-# tiktok-parser-bot
+bot-starter-pack
 
 # Pre-requisites
 
@@ -9,11 +9,13 @@
 • Set the token in the .env file to the variable TG_TOKEN=""
 
 • Install all packages
+
 ```
 npm i
 ```
 
 • Launch a bot
+
 ```
 npm start
 ```
