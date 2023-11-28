@@ -1,8 +1,6 @@
 import { Context } from 'telegraf';
 
-export default async function message(ctx: Context, next: Function) {
+export default async function buttonCallback (ctx: Context) {
   try {
   } catch (error) { console.log(`[ERROR] ${error}`) }
 }
-
-

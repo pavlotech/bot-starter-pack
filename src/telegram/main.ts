@@ -1,35 +1,33 @@
 import { Telegraf, Scenes, session } from 'telegraf';
-import dotenv from 'dotenv'; dotenv.config()
-import start from './commands/start';
-import help from './commands/help';
-import message from './events/message';
-import get_message from './callback/get_message';
-import get_url from './callback/get_url';
+import dotenv from 'dotenv';import buttonCallback from './buttons/callback';
+import commandCallback from './commands/callback';
+import Command from '../interfaces/commands';
+dotenv.config()
 
 export class Launch {
-  bot: any = new Telegraf<Scenes.SceneContext>(process.env.TG_TOKEN || '', { handlerTimeout: 60 * 60 * 1000 });
-  async Telegram () {
+  readonly token: string;
+  bot: any;
+
+  constructor(token: string) {
+    this.token = token;
+    this.bot = new Telegraf<Scenes.SceneContext>(this.token, { handlerTimeout: 60 * 60 * 1000 });
+  }
+  
+  async Telegram(commands: Command[]) {
     try {
-/*       const scene = new Scene()
-      const stage = new Scenes.Stage<Scenes.SceneContext>([
-        scene.firstDate(),
-        scene.secondDate(),
-        scene.getName(),
-      ], { ttl: 10 * 60 * 1000 }); */
       this.bot.use(session());
-      //this.bot.use(stage.middleware());
-
-      this.bot.start(start);
-      this.bot.command('help', help);
-      this.bot.command('command', get_message);
-      
-      this.bot.action('get_message', get_message);
-      this.bot.action('get_url', get_url);
-
-      this.bot.use(message)
+  
+      for (const command of commands) {
+        this.bot.command(command.name, (ctx: any) => commandCallback(ctx, command.response));
+      }
+  
+      this.bot.action(`action`, buttonCallback);
+  
       this.bot.launch();
-
-      console.log('[BOT] Started')
-    } catch (error) { console.log(`[ERROR] ${error}`)  }
+  
+      console.log('[BOT] Started');
+    } catch (error) {
+      console.log(`[ERROR] ${error}`);
+    }
   }
 }
