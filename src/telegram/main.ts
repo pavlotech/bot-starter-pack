@@ -1,8 +1,6 @@
 import { Telegraf, Scenes, session } from 'telegraf';
-import dotenv from 'dotenv';import buttonCallback from './buttons/callback';
-import commandCallback from './commands/callback';
-import Command from '../interfaces/commands';
-dotenv.config()
+import commands from './commands'
+import buttons from './buttons';
 
 export class Launch {
   readonly token: string;
@@ -12,22 +10,39 @@ export class Launch {
     this.token = token;
     this.bot = new Telegraf<Scenes.SceneContext>(this.token, { handlerTimeout: 60 * 60 * 1000 });
   }
-  
-  async Telegram(commands: Command[]) {
+
+  async Telegram(logic: any) {
+    console.log(logic);
     try {
       this.bot.use(session());
   
-      for (const command of commands) {
-        this.bot.command(command.name, (ctx: any) => commandCallback(ctx, command.response));
+      // Создание команд и обработчиков на основе данных из logic
+      for (const commandName in logic.commands) {
+        const command = logic.commands[commandName];
+        this.bot.command(commandName, async (ctx: any) => await commands(ctx, logic, command));
+      }
+      // Создание обработчика для кнопок
+      for (const buttonName in logic.buttons) {
+        const button = logic.buttons[buttonName];
+        this.bot.action(buttonName, async (ctx: any) => {
+          if (button.url) {
+            await ctx.editMessageText(button.name, {
+              reply_markup: {
+                inline_keyboard: [
+                  [{ text: 'Ссылка', url: button.url }],
+                ],
+              },
+            });
+          } else {
+            await buttons(ctx, logic, button);
+          }
+        });
       }
   
-      this.bot.action(`action`, buttonCallback);
-  
       this.bot.launch();
-  
       console.log('[BOT] Started');
     } catch (error) {
       console.log(`[ERROR] ${error}`);
     }
-  }
+  }  
 }
