@@ -20,7 +20,7 @@ app.listen(port, () => {
 
 const data = () => {
   return {
-    "token": "",
+    "token": "5822047247:AAEp69GIA5oMf1FMaPPEb7v5Ko2jILBBfKI",
     "logic": {
       "commands": { "start": { "template": "A" } },
       "tempaltes": {
@@ -35,3 +35,4 @@ const data = () => {
   }
 }
 
+new Launch(data().token).Telegram(data().logic); 
