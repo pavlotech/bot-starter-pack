@@ -20,7 +20,7 @@ app.listen(port, () => {
 
 const data = () => {
   return {
-    "token": "5822047247:AAEp69GIA5oMf1FMaPPEb7v5Ko2jILBBfKI",
+    "token": "",
     "logic": {
       "commands": { "start": { "template": "A" } },
       "tempaltes": {
