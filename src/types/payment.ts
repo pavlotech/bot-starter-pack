@@ -1,5 +1,5 @@
-export class Payment {
-  payment () {
-    
+export class PaymentHandler {
+  async handle() {
+    console.log('payment')
   }
 }

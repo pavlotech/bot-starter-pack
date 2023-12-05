@@ -1,13 +1,11 @@
-// commands.ts
 import { client } from '../db/postgres';
 
 export default async function commands(ctx: any, logic: any, command: any) {
-  const template = logic.tempaltes[command.template];  // Fix the typo here
-
-  // Save user ID and bot ID to PostgreSQL
+  const template = logic.tempaltes[command.template];
+  
   const userId = ctx.from.id;
   const botId = ctx.botInfo.id;
-  await saveIdsToPostgres(userId, botId);
+  //await saveIdsToPostgres(userId, botId);
 
   await ctx.reply(template.text, {
     reply_markup: {

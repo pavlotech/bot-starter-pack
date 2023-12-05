@@ -1,9 +1,9 @@
-import { Launch } from './src/telegram/main';
+import { Launch } from './src/telegram';
 import express from 'express';
 import bodyParser from 'body-parser';
 
 const app = express();
-const port = 4444;
+const port = process.argv.includes('--port') ? parseInt(process.argv[process.argv.indexOf('--port') + 1], 10) : 4444;
 
 app.use(bodyParser.json());
 
@@ -13,26 +13,31 @@ app.post('/processData', (req, res) => {
   new Launch(data().token).Telegram(data().logic);      
   res.json({ message: 'Data received successfully', token, logic });
 });
-  
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
 const data = () => {
   return {
-    "token": "",
+    "token": "5822047247:AAEp69GIA5oMf1FMaPPEb7v5Ko2jILBBfKI",
     "logic": {
       "commands": { "start": { "template": "A" } },
       "tempaltes": {
         "A": { "text": 'KAJFDK', "buttons": ["B1"] },
-        "B": { "text": 'DFSDS', "buttons": ["B2"] }
+        "B": { "text": 'DFSDSH', "buttons": ["B2"] },
+        "C": { "text": 'IURFVU', "buttons": ["payment"]}
       },
       "buttons": {
-        "B1": { "name": 'AHJ', "template": 'B' },
-        "B2": { "name": 'dfdfd', "template": 'A' },
+        "options": {
+          "size": 3
+        },
+        "B1": { "name": 'kfmvm', "template": 'B' },
+        "B2": { "name": 'dfdfd', "template": 'C' },
+        "payment": { "name": 'payment', "text": 'оплатить', "template": 'payment' }
       }
     }
   }
 }
 
-new Launch(data().token).Telegram(data().logic); 
+new Launch(data().token).Telegram(data().logic);

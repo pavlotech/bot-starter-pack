@@ -31,7 +31,7 @@
     "prisma": "^4.14.1"
   },
   "scripts": {
-    "start": "nodemon index.ts"
+    "start": "nodemon --exec ts-node index.ts"
   },
   "compilerOptions": {
     "typeRoots": [
