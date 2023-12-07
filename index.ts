@@ -23,18 +23,16 @@ const data = () => {
     "token": "5822047247:AAEp69GIA5oMf1FMaPPEb7v5Ko2jILBBfKI",
     "logic": {
       "commands": { "start": { "template": "A" } },
-      "tempaltes": {
-        "A": { "text": 'KAJFDK', "buttons": ["B1"] },
-        "B": { "text": 'DFSDSH', "buttons": ["B2"] },
-        "C": { "text": 'IURFVU', "buttons": ["payment"]}
+      "templates": {
+        "A": { "text": "МАГАЗИН", "buttons": ["B1"] },
+        "B": { "text": "ТОВАРЫ", "buttons": ["B2"] },
+        "C": { "text": "КУПИТЬ ПИВО", "buttons": ["VFL", "TO-SHOP"]}
       },
       "buttons": {
-        "options": {
-          "size": 3
-        },
-        "B1": { "name": 'kfmvm', "template": 'B' },
-        "B2": { "name": 'dfdfd', "template": 'C' },
-        "payment": { "name": 'payment', "text": 'оплатить', "template": 'payment' }
+        "B1": { "type": "btn", "text": "ПОСМОРЕТЬ ТОВАРЫ", "template": "B" },
+        "B2": { "type": "btn", "text": "ПИВО", "template": "C" },
+        "VFL": { "type": "payment", "service": "paypal", "price": 12, "text": "ОПЛАТИТЬ - 12$", "template": "payment" },
+        "TO-SHOP": {"type": "btn", "text": "НАЗАД", "template": "A"}
       }
     }
   }

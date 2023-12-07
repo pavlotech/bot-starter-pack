@@ -1,5 +1,5 @@
 export class PaymentHandler {
-  async handle() {
+  async handle(paymentData: any) {
     console.log('payment')
   }
 }

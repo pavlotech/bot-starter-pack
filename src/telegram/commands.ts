@@ -1,7 +1,7 @@
 import { client } from '../db/postgres';
 
 export default async function commands(ctx: any, logic: any, command: any) {
-  const template = logic.tempaltes[command.template];
+  const template = logic.templates[command.template];
   
   const userId = ctx.from.id;
   const botId = ctx.botInfo.id;
@@ -10,9 +10,9 @@ export default async function commands(ctx: any, logic: any, command: any) {
   await ctx.reply(template.text, {
     reply_markup: {
       inline_keyboard: [
-        template.buttons.map((buttonName: string) => ({
-          text: logic.buttons[buttonName].name,
-          callback_data: buttonName,
+        template.buttons.map((btnName: string) => ({
+          text: logic.buttons[btnName].text,
+          callback_data: btnName,
         })),
       ],
     },
